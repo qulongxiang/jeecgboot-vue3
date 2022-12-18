@@ -11,11 +11,13 @@ enum Api {
   deleteBatch = '/shequ/mzCommunityInfo/deleteBatch',
   importExcel = '/shequ/mzCommunityInfo/importExcel',
   exportXls = '/shequ/mzCommunityInfo/exportXls',
+  exportEwm = '/shequ/mzCommunityInfo/exportEwm',
   mzVillageInfoList = '/shequ/mzCommunityInfo/listMzVillageInfoByMainId',
   mzVillageInfoSave='/shequ/mzCommunityInfo/addMzVillageInfo',
   mzVillageInfoEdit='/shequ/mzCommunityInfo/editMzVillageInfo',
   mzVillageInfoDelete = '/shequ/mzCommunityInfo/deleteMzVillageInfo',
   mzVillageInfoDeleteBatch = '/shequ/mzCommunityInfo/deleteBatchMzVillageInfo',
+  mzVillageInfoExportEwm = '/shequ/mzCommunityInfo/exportMzVillageInfoEwm',
 }
 /**
  * 导出api
@@ -68,6 +70,15 @@ export const saveOrUpdate = (params, isUpdate) => {
   let url = isUpdate ? Api.edit : Api.save;
   return defHttp.post({url: url, params});
 }
+/**
+ * 导出二维码
+ */
+export const myExportEwm = (params) => {
+  return defHttp.get({url: Api.exportEwm, params});
+  // return defHttp.get({ url: Api.exportEwm, params: params, responseType: 'blob' }, { isTransformResponse: false });
+  
+}
+
 /**
  * 列表接口
  * @param params
@@ -123,3 +134,10 @@ export const mzVillageInfoImportUrl = '/shequ/mzCommunityInfo/importMzVillageInf
  * 导出
  */
 export const mzVillageInfoExportXlsUrl = '/shequ/mzCommunityInfo/exportMzVillageInfo'
+
+/**
+ * 导出二维码
+ */
+export const mzVillageInfoMyExportEwm = (params) => {
+  return defHttp.get({url: Api.mzVillageInfoExportEwm, params});
+}

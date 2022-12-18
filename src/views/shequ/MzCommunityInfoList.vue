@@ -58,7 +58,7 @@
   import MzCommunityInfoModal from './components/MzCommunityInfoModal.vue'
   import MzVillageInfoList from './MzVillageInfoList.vue'
   import {columns, searchFormSchema} from './MzCommunityInfo.data';
-  import {list, deleteOne, batchDelete, getImportUrl,getExportUrl} from './MzCommunityInfo.api';
+  import {list, deleteOne, batchDelete, getImportUrl,getExportUrl,myExportEwm} from './MzCommunityInfo.api';
   import {downloadFile} from '/@/utils/common/renderUtils';
   //注册model
   const [registerModal, {openModal}] = useModal();
@@ -142,7 +142,25 @@
     */
   async function batchHandleDelete() {
      await batchDelete({ids: selectedRowKeys.value},handleSuccess);
-   }
+  }
+  /**
+   * 导出二维码
+   */
+  async function onExportEwm() {
+    const data=await myExportEwm({ids: selectedRowKeys.value});
+    if(data){
+      let url =data.downUrl
+      let link = document.createElement('a');
+      link.style.display = 'none';
+      link.href = url;
+      link.setAttribute('download', url);
+      link.setAttribute('target', '_blank');
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link); //下载完成移除元素
+      window.URL.revokeObjectURL(url); //释放掉blob对象
+    }
+  }
    /**
     * 成功回调
     */
@@ -161,11 +179,6 @@
        ]
    }
 
-  // 导出二维码
-  async function onExportEwm() {
-     
-  //  '/shequ/mzCommunityInfo/exportEwm',
-  }
 
   /**
    * 下拉操作栏

@@ -4,8 +4,9 @@
     <BasicTable @register="registerTable" :rowSelection="rowSelection" :searchInfo="searchInfo">
       <!--插槽:table标题-->
        <template #tableTitle>
-           <a-button type="primary" @click="handleCreate" preIcon="ant-design:plus-outlined"> 新增</a-button>
+           <a-button  type="primary" @click="handleCreate" preIcon="ant-design:plus-outlined"> 新增</a-button>
            <a-button  type="primary" preIcon="ant-design:export-outlined" @click="onExportXls"> 导出</a-button>
+           <a-button  type="primary" preIcon="ant-design:export-outlined" @click="onExportEwm"> 导出二维码</a-button>
            <j-upload-button  type="primary" preIcon="ant-design:import-outlined" @click="onImportXls">导入</j-upload-button>
            <a-dropdown v-if="selectedRowKeys.length > 0">
                <template #overlay>
@@ -46,11 +47,11 @@
   import {useModal} from '/@/components/Modal';
   import MzVillageInfoModal from './components/MzVillageInfoModal.vue'
   import {mzVillageInfoColumns} from './MzCommunityInfo.data';
-  import {mzVillageInfoList, mzVillageInfoDelete, mzVillageInfoDeleteBatch, mzVillageInfoExportXlsUrl, mzVillageInfoImportUrl } from './MzCommunityInfo.api';
+  import {mzVillageInfoList, mzVillageInfoDelete, mzVillageInfoDeleteBatch, mzVillageInfoExportXlsUrl, mzVillageInfoImportUrl,mzVillageInfoMyExportEwm } from './MzCommunityInfo.api';
   import {isEmpty} from "/@/utils/is";
   import {useMessage} from '/@/hooks/web/useMessage';
   import {downloadFile} from '/@/utils/common/renderUtils';
-
+  
     //接收主表id
     const mainId = inject('mainId') || '';
     //提示弹窗
@@ -134,6 +135,24 @@
      */
     async function batchHandleDelete() {
         await mzVillageInfoDeleteBatch({ids: selectedRowKeys.value}, handleSuccess)
+    }
+    /**
+     * 导出二维码
+     */
+    async function onExportEwm() {
+        const data=await mzVillageInfoMyExportEwm({ids: selectedRowKeys.value,mzCommunityId:unref(mainId)});
+        if(data){
+        let url =data.downUrl
+        let link = document.createElement('a');
+        link.style.display = 'none';
+        link.href = url;
+        link.setAttribute('download', url);
+        link.setAttribute('target', '_blank');
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link); //下载完成移除元素
+        window.URL.revokeObjectURL(url); //释放掉blob对象
+        }
     }
 
     /**
