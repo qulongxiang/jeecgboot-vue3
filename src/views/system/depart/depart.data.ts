@@ -30,12 +30,12 @@ export function useBasicFormSchema() {
         placeholder: '请输入机构编码',
       },
     },
-    {
-      field: 'orgCategory',
-      label: '机构类型',
-      component: 'RadioButtonGroup',
-      componentProps: { options: [] },
-    },
+    // {
+    //   field: 'orgCategory',
+    //   label: '机构类型',
+    //   component: 'RadioButtonGroup',
+    //   componentProps: { options: [] },
+    // },
     {
       field: 'departOrder',
       label: '排序',

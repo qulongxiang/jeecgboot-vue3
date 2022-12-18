@@ -1,6 +1,7 @@
 import { BasicColumn } from '/@/components/Table';
 import { FormSchema } from '/@/components/Table';
-import { getAllRolesList, getAllTenantList } from './user.api';
+// import { getAllRolesList, getAllTenantList } from './user.api';
+import { getAllRolesList } from './user.api';
 import { rules } from '/@/utils/helper/validator';
 import { render } from '/@/utils/common/renderUtils';
 export const columns: BasicColumn[] = [
@@ -40,15 +41,15 @@ export const columns: BasicColumn[] = [
     width: 100,
   },
   {
-    title: '部门',
+    title: '机构',
     width: 150,
     dataIndex: 'orgCodeTxt',
   },
-  {
-    title: '负责部门',
-    width: 150,
-    dataIndex: 'departIds_dictText',
-  },
+  // {
+  //   title: '负责部门',
+  //   width: 150,
+  //   dataIndex: 'departIds_dictText',
+  // },
   {
     title: '状态',
     dataIndex: 'status_dictText',
@@ -98,16 +99,25 @@ export const searchFormSchema: FormSchema[] = [
     colProps: { span: 6 },
   },
   {
-    label: '性别',
-    field: 'sex',
-    component: 'JDictSelectTag',
+    label: '职务',
+    field: 'post',
+    component: 'JSelectPosition',
     componentProps: {
-      dictCode: 'sex',
-      placeholder: '请选择性别',
-      stringToNumber: true,
+      rowKey: 'code',
+      labelKey: 'name',
     },
-    colProps: { span: 6 },
   },
+  // {
+  //   label: '性别',
+  //   field: 'sex',
+  //   component: 'JDictSelectTag',
+  //   componentProps: {
+  //     dictCode: 'sex',
+  //     placeholder: '请选择性别',
+  //     stringToNumber: true,
+  //   },
+  //   colProps: { span: 6 },
+  // },
   {
     label: '手机号码',
     field: 'phone',
@@ -195,7 +205,7 @@ export const formSchema: FormSchema[] = [
     },
   },
   {
-    label: '所属部门',
+    label: '所属机构',
     field: 'selecteddeparts',
     component: 'JSelectDept',
     componentProps: ({ formActionType, formModel }) => {
@@ -219,44 +229,44 @@ export const formSchema: FormSchema[] = [
       };
     },
   },
-  {
-    label: '租户',
-    field: 'relTenantIds',
-    component: 'ApiSelect',
-    componentProps: {
-      mode: 'multiple',
-      api: getAllTenantList,
-      numberToString: true,
-      labelField: 'name',
-      valueField: 'id',
-    },
-  },
-  {
-    label: '身份',
-    field: 'userIdentity',
-    component: 'RadioGroup',
-    defaultValue: 1,
-    componentProps: ({ formModel }) => {
-      return {
-        options: [
-          { label: '普通用户', value: 1, key: '1' },
-          { label: '上级', value: 2, key: '2' },
-        ],
-        onChange: () => {
-          formModel.userIdentity == 1 && (formModel.departIds = []);
-        },
-      };
-    },
-  },
-  {
-    label: '负责部门',
-    field: 'departIds',
-    component: 'Select',
-    componentProps: {
-      mode: 'multiple',
-    },
-    ifShow: ({ values }) => values.userIdentity == 2,
-  },
+  // {
+  //   label: '租户',
+  //   field: 'relTenantIds',
+  //   component: 'ApiSelect',
+  //   componentProps: {
+  //     mode: 'multiple',
+  //     api: getAllTenantList,
+  //     numberToString: true,
+  //     labelField: 'name',
+  //     valueField: 'id',
+  //   },
+  // },
+  // {
+  //   label: '身份',
+  //   field: 'userIdentity',
+  //   component: 'RadioGroup',
+  //   defaultValue: 1,
+  //   componentProps: ({ formModel }) => {
+  //     return {
+  //       options: [
+  //         { label: '普通用户', value: 1, key: '1' },
+  //         { label: '上级', value: 2, key: '2' },
+  //       ],
+  //       onChange: () => {
+  //         formModel.userIdentity == 1 && (formModel.departIds = []);
+  //       },
+  //     };
+  //   },
+  // },
+  // {
+  //   label: '负责部门',
+  //   field: 'departIds',
+  //   component: 'Select',
+  //   componentProps: {
+  //     mode: 'multiple',
+  //   },
+  //   ifShow: ({ values }) => values.userIdentity == 2,
+  // },
   {
     label: '头像',
     field: 'avatar',
@@ -303,17 +313,17 @@ export const formSchema: FormSchema[] = [
     component: 'Input',
     rules: [{ pattern: /^0\d{2,3}-[1-9]\d{6,7}$/, message: '请输入正确的座机号码' }],
   },
-  {
-    label: '工作流引擎',
-    field: 'activitiSync',
-    defaultValue: 1,
-    component: 'JDictSelectTag',
-    componentProps: {
-      dictCode: 'activiti_sync',
-      type: 'radio',
-      stringToNumber: true,
-    },
-  },
+  // {
+  //   label: '工作流引擎',
+  //   field: 'activitiSync',
+  //   defaultValue: 1,
+  //   component: 'JDictSelectTag',
+  //   componentProps: {
+  //     dictCode: 'activiti_sync',
+  //     type: 'radio',
+  //     stringToNumber: true,
+  //   },
+  // },
 ];
 
 export const formPasswordSchema: FormSchema[] = [

@@ -11,7 +11,7 @@
               <DepartFormTab :data="departData" :rootTreeData="rootTreeData" @success="onSuccess" />
             </div>
           </a-tab-pane>
-          <a-tab-pane tab="部门权限" key="role-info">
+          <a-tab-pane tab="机构权限" key="role-info">
             <div style="padding: 0 20px 20px">
               <DepartRuleTab :data="departData" />
             </div>
