@@ -68,7 +68,7 @@ export const formSchema: FormSchema[] = [
     field: 'ssjd',
     component: 'JDictSelectTag',
     componentProps:{
-        dictCode:"sys_depart,depart_name,id"
+        dictCode:"sys_depart,depart_name,org_code"
      },
     dynamicRules: ({model,schema}) => {
           return [
