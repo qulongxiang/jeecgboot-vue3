@@ -25,9 +25,9 @@ export const columns: BasicColumn[] = [
     dataIndex: 'sqfzr'
    },
    {
-    title: '成立日期',
+    title: '居民小区数',
     align:"center",
-    dataIndex: 'clrq',
+    dataIndex: 'jmxqs',
     customRender:({text}) =>{
       return !text?"":(text.length>10?text.substr(0,10):text)
     },
@@ -124,6 +124,11 @@ export const formSchema: FormSchema[] = [
      },
   },
   {
+    label: '社区工作者人数',
+    field: 'gzrys',
+    component: 'InputNumber',
+  },
+  {
     label: '成立日期',
     field: 'clrq',
     component: 'DatePicker',
@@ -131,6 +136,16 @@ export const formSchema: FormSchema[] = [
   {
     label: '辖区面积',
     field: 'xqmj',
+    component: 'InputNumber',
+  },
+  {
+    label: '社区服务用房面积',
+    field: 'snhdcsmj',
+    component: 'InputNumber',
+  },
+  {
+    label: '室外活动广场面积',
+    field: 'swhdcsmj',
     component: 'InputNumber',
   },
   {
@@ -149,25 +164,25 @@ export const formSchema: FormSchema[] = [
     component: 'InputNumber',
   },
   {
-    label: '户数',
+    label: '规划户数',
     field: 'hs',
     component: 'InputNumber',
   },
-  {
-    label: '入住居民小区数',
-    field: 'rzJmxqs',
-    component: 'InputNumber',
-  },
-  {
-    label: '入住栋楼数',
-    field: 'rzDls',
-    component: 'InputNumber',
-  },
-  {
-    label: '入住单元数',
-    field: 'rzDys',
-    component: 'InputNumber',
-  },
+  // {
+  //   label: '入住居民小区数',
+  //   field: 'rzJmxqs',
+  //   component: 'InputNumber',
+  // },
+  // {
+  //   label: '入住栋楼数',
+  //   field: 'rzDls',
+  //   component: 'InputNumber',
+  // },
+  // {
+  //   label: '入住单元数',
+  //   field: 'rzDys',
+  //   component: 'InputNumber',
+  // },
   {
     label: '长期居住户数',
     field: 'rzHs',
@@ -239,22 +254,17 @@ export const formSchema: FormSchema[] = [
     component: 'InputNumber',
   },
   {
-    label: '工作人员数',
-    field: 'gzrys',
-    component: 'InputNumber',
-  },
-  {
-    label: '其中招聘人数',
+    label: '公开招聘人数',
     field: 'gzrysZprs',
     component: 'InputNumber',
   },
   {
-    label: '其中两委人数',
+    label: '两委人数',
     field: 'gzrysLwrs',
     component: 'InputNumber',
   },
   {
-    label: '其中交叉任职人数',
+    label: '交叉任职人数',
     field: 'gzrysJcrzrs',
     component: 'InputNumber',
   },
@@ -279,18 +289,8 @@ export const formSchema: FormSchema[] = [
     component: 'InputNumber',
   },
   {
-    label: '工作师证人数',
+    label: '社工证持证人数',
     field: 'gzszrs',
-    component: 'InputNumber',
-  },
-  {
-    label: '室内活动场所面积',
-    field: 'snhdcsmj',
-    component: 'InputNumber',
-  },
-  {
-    label: '室外活动场所面积',
-    field: 'swhdcsmj',
     component: 'InputNumber',
   },
   {
@@ -314,7 +314,7 @@ export const formSchema: FormSchema[] = [
     component: 'InputNumber',
   },
   {
-    label: '专项服务',
+    label: '其他',
     field: 'zxfw',
     component: 'Input',
   },

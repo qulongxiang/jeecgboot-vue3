@@ -122,7 +122,16 @@
             showFooter: true,
         });
     }
-
+    /**
+    * 详情
+    */
+   function handleDetail(record: Recordable) {
+     openModal(true, {
+       record,
+       isUpdate: true,
+       showFooter: false,
+     });
+   }
     /**
      * 删除事件
      */
@@ -170,6 +179,9 @@
             {
                 label: '编辑',
                 onClick: handleEdit.bind(null, record),
+            }, {
+                label: '查看',
+                onClick: handleDetail.bind(null, record),
             }, {
                 label: '删除',
                 popConfirm: {
